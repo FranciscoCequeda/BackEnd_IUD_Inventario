@@ -1,10 +1,10 @@
-const { Schema, model } = require("mongoose");
+const { model, Schema } = require("mongoose");
 
-const tipoEquipoSchema = Schema(
+const EstadoSchema = Schema(
     {
         nombre: {
             type: String,
-            required: [true, "Nombre obligatorio"]
+            required: [true, 'Campo requerido']
         },
         estado: {
             type: Boolean,
@@ -22,4 +22,4 @@ const tipoEquipoSchema = Schema(
     }
 );
 
-module.exports = model('TipoEquipo', tipoEquipoSchema)
+module.exports = model('Estado', EstadoSchema);

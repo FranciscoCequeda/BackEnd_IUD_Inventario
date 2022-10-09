@@ -1,15 +1,15 @@
-const { Schema, model } = require("mongoose");
+const { model, Schema } = require("mongoose");
 
-const tipoEquipoSchema = Schema(
+const MarcasSchema = Schema(
     {
         nombre: {
             type: String,
-            required: [true, "Nombre obligatorio"]
+            required: true
         },
         estado: {
             type: Boolean,
-            default: true,
-            required: true
+            required: true,
+            default: true
         },
         fecha_creacion: {
             type: Date,
@@ -19,7 +19,6 @@ const tipoEquipoSchema = Schema(
             type: Date,
             default: new Date()
         }
-    }
-);
+    });
 
-module.exports = model('TipoEquipo', tipoEquipoSchema)
+module.exports = model("Marcas", MarcasSchema)

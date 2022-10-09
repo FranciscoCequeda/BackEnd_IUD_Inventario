@@ -1,32 +1,32 @@
 const { Router } = require("express");
 
-const { createTipoEquipo, getTiposEquipo, getTipoEquipoById, updateTipoEquipoById, deleteTipoEquipoById } = require('../controllers/tipoEquipo')
+const { createTipoEquipo, getTipoEquipos, getTipoEquipoById, updateTipoEquipoById, deleteTipoEquipoById } = require('../controllers/tipoEquipo')
 
 const router = Router();
 
 /*
-Crear un tipo de equipo
-*/
-router.post("/", createTipoEquipo);
+Crear TipoEquipo
+ */
+router.post("/create", createTipoEquipo);
 
 /*
-Consulta todos los tipos de equipo 
+Consultar todos los elementos de la coleccion TipoEquipo
 */
-router.get("/", getTiposEquipo);
+router.get("/all", getTipoEquipos);
 
 /*
-Consulta un tipo de equipo por su ID
+Consultar un elemento de TipoEquipo por su ID
 */
 router.get("/:id", getTipoEquipoById);
 
 /*
-Actualiza un tipo de equipo por su ID
+Actualizar un elemento de TipoEquipo por su ID
 */
-router.put("/:id", updateTipoEquipoById);
+router.put("/update/:id", updateTipoEquipoById);
 
 /*
-Borra un tipo de equipo por su ID
+Borrar un elemento de TipoEquipo por su ID
 */
-router.delete("/:id", deleteTipoEquipoById);
+router.delete("/delete/:id", deleteTipoEquipoById);
 
 module.exports = router;

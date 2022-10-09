@@ -4,12 +4,12 @@ const app = express();
 
 //TODO: Importar y Habilitar los cors
 
-
 /*
-* Importacion rutas
+* Importacion rutas de Router (Para mapear los metodos y sus endpoints)
 */
 
 const tipoEquipos = require("./routes/tipoEquipo");
+const Estados = require("./routes/estado");
 
 
 /*
@@ -23,5 +23,6 @@ const tipoEquipos = require("./routes/tipoEquipo");
 app.use(express.json())
 
 app.use("/api/tipoequipos", tipoEquipos);
+app.use("/api/estados", Estados);
 
 module.exports = app;

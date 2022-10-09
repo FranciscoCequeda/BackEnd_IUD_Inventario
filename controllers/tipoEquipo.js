@@ -2,111 +2,115 @@ const TipoEquipo = require("../models/tipoEquipo");
 
 const { request, response } = require("express");
 
+// Creacion de CRUD TipoEquipo
 /*
-Crear un tipo de equipo
+Crear TipoEquipo
  */
 const createTipoEquipo = async (req = request, res = response) => {
     try {
 
-        if (!req.body.nombre == true || req.body == `{}`) {
-            res.status(401).json({ msg: 'No está autorizadoooo!!' })
+        if (req.body.nombre.length < 3) {
+            return res.status(400).json({ msg: 'Dato debe ser mayor a 3 caracteres!!' })
         }
-        const nombre = (req.body.nombre.toUpperCase());
+
+        const nombre = req.body.nombre.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "");
         const tipoEquipoBD = await TipoEquipo.findOne({ nombre })
 
         if (tipoEquipoBD) {
-            return res.status(400).json({ msg: 'Ya existe nombre' })
+            return res.status(400).json({ msg: 'Ya existe en la DB' })
         }
 
-        const datos = {
-            nombre
-        }
+        const datos = { nombre }
 
         const tipoEquipo = new TipoEquipo(datos)
-        console.log(tipoEquipo)
+
         await tipoEquipo.save()
         res.status(201).json(tipoEquipo)
+
     } catch (e) {
-        console.log(e)
         return res.status(500).json({
-            msg: e
+            msg: "Por favor ingrese un dato valido!"
         })
     }
 }
 
 /*
-Consultar todos los tipos de equipo 
+Consultar todos los documentos de la coleccion TipoEquipo
 */
-const getTiposEquipo = async (req = request,
-    res = response) => {
+const getTipoEquipos = async (req = request, res = response) => {
     try {
-        console.log(req.query)
-        const estado = req.query.estado
-        const query = { estado: estado }
-        const tipoequiposBD = await TipoEquipo.find(query)
-        return res.json(tipoequiposBD)
+        const estado = req.query
+        if (!estado.estado) {
+            const tipoequiposBD = await TipoEquipo.find()
+            return res.json(tipoequiposBD)
+        } else {
+            const tipoequiposBD = await TipoEquipo.find(estado)
+            return res.json(tipoequiposBD)
+        }
+    } catch (e) {
+        return res.status(500).json({ msj: "Error al realizar la peticion!!", e })
+    }
+}
+
+/*
+Consultar un documento de TipoEquipo por su ID
+*/
+const getTipoEquipoById = async (req = request, res = response) => {
+    try {
+        const id = req.params.id
+        const tipoEquipoDB = await TipoEquipo.findById(id)
+
+        if (!tipoEquipoDB) {
+            return res.status(404).json({ msg: "Tipo Equipo No encontrado" })
+        }
+
+        return res.json(tipoEquipoDB)
+    } catch (e) {
+        return res.status(500).json({ msj: "Error al realizar la Consulta, por favor verifique!!", e })
+    }
+}
+
+/*
+Actualizar un documento de TipoEquipo por su ID
+*/
+const updateTipoEquipoById = async (req = request, res = response) => {
+    try {
+        const id = req.params.id
+        const nombre = req.body.nombre.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "");;
+        const estado = req.body.estado;
+        const data = { nombre, estado }
+        
+        data.fecha_actualizacion = new Date()
+
+        const tipoEquipo = await TipoEquipo.findByIdAndUpdate(id, data, { new: true })
+        return res.json({ tipoEquipo })
     } catch (e) {
         return res.status(500).json({ msj: e })
     }
 }
 
 /*
-Consultar tipo de equipo por su ID
-*/
-const getTipoEquipoById = async (req = request, res = response) => {
-    try {
-        const id = req.params.id
-        const estado = req.query.estado
-        const query = { estado: estado, _id: id }
-
-        const tipoEquipoDB = await TipoEquipo.findOne(filter)
-
-        return res.json(TipoEquipo)
-    } catch (error) {
-        return res.status(500).json({ msj: error })
-    }
-}
-
-
-/*
-Actualizar un tipo de equipo por su ID
-*/
-const updateTipoEquipoById = async (req = request, res = response) => {
-    try {
-        const id = req.params.id
-
-        const data = req.body
-
-        data.fechaActualizacion = new Date()
-
-        const tipoEquipo = await TipoEquipo.findByIdAndUpdate(id, data, { new: true })
-        return res.json({ tipoEquipo })
-    } catch (error) {
-        return res.status(500).json({ msj: error })
-    }
-}
-
-/*
-Borrar un tipo de equipo por su ID
+Borrar un documento de TipoEquipo por su ID
 */
 const deleteTipoEquipoById = async (req = request, res = response) => {
     try {
         const id = req.params.id
         const TipoEquipoBD = await TipoEquipo.findById(id)
 
-        if (!TipoEquipo) {
-            return res.status(404).json({ msj: "No existe" })
+        if (!TipoEquipoBD) {
+            return res.status(404).json({ msj: "No existe, Tipo de equipo no encontrado!!" })
         }
 
         await TipoEquipo.findByIdAndDelete(id)
-        return res.status(204).json({ msj: "Borrado", id })
-    } catch (error) {
-        return res.status(500).json({ msj: error })
+        return res.status(200).json({ msj: "Borrado satisfactorio!!", id })
+    } catch (e) {
+        return res.status(500).json({ msj: "Error al realizar la operacion!!", e })
     }
 
 }
 
-module.exports = {  createTipoEquipo, getTiposEquipo, 
-                    getTipoEquipoById, updateTipoEquipoById, 
-                    deleteTipoEquipoById
-                }
+module.exports = {
+    createTipoEquipo, getTipoEquipos,
+    getTipoEquipoById, updateTipoEquipoById,
+    deleteTipoEquipoById
+}
