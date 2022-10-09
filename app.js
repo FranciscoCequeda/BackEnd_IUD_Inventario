@@ -10,6 +10,8 @@ const app = express();
 
 const tipoEquipos = require("./routes/tipoEquipo");
 const Estados = require("./routes/estado");
+const Marcas = require("./routes/marca")
+const Usuarios = require("./routes/usuario")
 
 
 /*
@@ -24,5 +26,7 @@ app.use(express.json())
 
 app.use("/api/tipoequipos", tipoEquipos);
 app.use("/api/estados", Estados);
+app.use("/api/marcas", Marcas);
+app.use("/api/usuarios", Usuarios);
 
 module.exports = app;

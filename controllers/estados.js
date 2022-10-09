@@ -10,6 +10,7 @@ Crear Estado
  */
 
 const createEstado = async (req = request, res = response) => {
+    
     try {
 
         if (req.body.nombre.length < 3) {
@@ -25,9 +26,10 @@ const createEstado = async (req = request, res = response) => {
 
         const estadoSchema = new Estado(data);
         await estadoSchema.save();
-        return res.status(201).json({ msg: "Elemento creado correctamente!" })
+        return res.status(201).json({ msg: "Estado creado correctamente!", estadoSchema})
+
     } catch (e) {
-        return res.status(400).json({ msj: "Error de petición!!!", e })
+        return res.status(500).json({ Error: 'No se puede realizar la solicitud!!', e });
     }
 }
 
@@ -49,7 +51,7 @@ const getAllEstados = async (req = request, res = response) => {
         }
 
     } catch (e) {
-        return res.status(500).json({ msg: "Error al realizar la peticion" })
+        return res.status(500).json({ Error: 'No se puede realizar la solicitud!!', e });
     }
 }
 
@@ -64,13 +66,13 @@ const getEstadoByID = async (req = request, res = response) => {
         const estado = await Estado.findById(id);
 
         if (!estado) {
-            return res.status(404).json({ msg: "Estado No encontrado" })
+            return res.status(404).json({ Error: "Error, Estado no encontrado!!" });
         }
 
         return res.status(200).json(estado)
 
     } catch (e) {
-        return res.status(500).json({ msg: "Error al realizar la peticion!!", e })
+        return res.status(500).json({ Error: 'No se puede realizar la solicitud!!', e });
     }
 }
 
@@ -80,29 +82,30 @@ Actualizar un documento de Estado por su ID
 */
 
 const updateEstadobyID = async (req = request, res = response) => {
+
     try {
 
         if (req.body.nombre.length < 3 || req.body.estado.length < 3) {
-            return res.status(404).json({ error: "Valores incorrectos!!" });
+            return res.status(400).json({ error: "Valores incorrectos!!" });
         }
 
         const id = req.params.id;
-        const nombre = req.body.nombre.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "");;
+        const nombre = req.body.nombre.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "");
         const estado = req.body.estado;
-        const data = { nombre, estado }
+        const data = { nombre, estado };
         data.fecha_actualizacion = new Date();
 
         const val = await Estado.findById(id);
 
         if (!val) {
-            return res.status(404).json({ msg: "No existe el elemento!!" })
+            return res.status(404).json({ Error: "Error, Estado no encontrado!!" });
         }
 
         const estadoDB = await Estado.findByIdAndUpdate(id, data, { new: true })
         return res.status(201).json({ msg: "Actualizacion realizada correctamente!!", estadoDB })
 
     } catch (e) {
-        return res.status(500).json({ error: "Error al realizar la peticion!!", e });
+        return res.status(500).json({ Error: 'No se puede realizar la solicitud!!', e });
     }
 }
 
@@ -118,17 +121,15 @@ const deleteEstadobyID = async (req = request, res = response) => {
         const estadoDB = await Estado.findById(id);
 
         if (!estadoDB) {
-            return res.status(404).json({ Error: "Error, Estado no encontrado" });
+            return res.status(404).json({ Error: "Error, Estado no encontrado!!" });
         }
 
         await Estado.findByIdAndDelete(id);
-
-        return res.status(200).json({ msg: "Operacion realizada con exito!!, se borró coleccion:", estadoDB })
+        return res.status(200).json({ msg: "Operacion realizada con exito!!, se borró Estado:", estadoDB })
+        
     } catch (e) {
-        return res.status(500).json({ msg: "No se puede realizar la operacion!!", e })
+        return res.status(500).json({ Error: 'No se puede realizar la solicitud!!', e });
     }
 }
 
-module.exports = {
-    createEstado, getAllEstados, getEstadoByID, updateEstadobyID, deleteEstadobyID
-}
+module.exports = { createEstado, getAllEstados, getEstadoByID, updateEstadobyID, deleteEstadobyID}

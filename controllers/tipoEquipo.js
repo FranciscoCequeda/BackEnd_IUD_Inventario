@@ -25,12 +25,10 @@ const createTipoEquipo = async (req = request, res = response) => {
         const tipoEquipo = new TipoEquipo(datos)
 
         await tipoEquipo.save()
-        res.status(201).json(tipoEquipo)
+        return res.status(201).json({ msg: "Tipo de equipo creado correctamente!", tipoEquipo})
 
     } catch (e) {
-        return res.status(500).json({
-            msg: "Por favor ingrese un dato valido!"
-        })
+        return res.status(500).json({ Error: 'No se puede realizar la solicitud!!', e });
     }
 }
 
@@ -40,6 +38,7 @@ Consultar todos los documentos de la coleccion TipoEquipo
 const getTipoEquipos = async (req = request, res = response) => {
     try {
         const estado = req.query
+
         if (!estado.estado) {
             const tipoequiposBD = await TipoEquipo.find()
             return res.json(tipoequiposBD)
@@ -48,7 +47,7 @@ const getTipoEquipos = async (req = request, res = response) => {
             return res.json(tipoequiposBD)
         }
     } catch (e) {
-        return res.status(500).json({ msj: "Error al realizar la peticion!!", e })
+        return res.status(500).json({ Error: 'No se puede realizar la solicitud!!', e });
     }
 }
 
@@ -61,12 +60,12 @@ const getTipoEquipoById = async (req = request, res = response) => {
         const tipoEquipoDB = await TipoEquipo.findById(id)
 
         if (!tipoEquipoDB) {
-            return res.status(404).json({ msg: "Tipo Equipo No encontrado" })
+            return res.status(404).json({ Error: "Error, Tipo de equipo no encontrado!!" })
         }
 
         return res.json(tipoEquipoDB)
     } catch (e) {
-        return res.status(500).json({ msj: "Error al realizar la Consulta, por favor verifique!!", e })
+        return res.status(500).json({ Error: 'No se puede realizar la solicitud!!', e });
     }
 }
 
@@ -75,17 +74,27 @@ Actualizar un documento de TipoEquipo por su ID
 */
 const updateTipoEquipoById = async (req = request, res = response) => {
     try {
+
+        if (req.body.nombre.length < 3 || req.body.estado.length < 3) {
+            return res.status(400).json({ error: "Valores incorrectos!!" });
+        }
+
         const id = req.params.id
         const nombre = req.body.nombre.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "");;
         const estado = req.body.estado;
         const data = { nombre, estado }
-        
         data.fecha_actualizacion = new Date()
 
+        const val = await Estado.findById(id);
+
+        if (!val) {
+            return res.status(404).json({ Error: "Error, Tipo de equipo no encontrado!!" })
+        }
+
         const tipoEquipo = await TipoEquipo.findByIdAndUpdate(id, data, { new: true })
-        return res.json({ tipoEquipo })
+        return res.json({ msg: "Actualizacion realizada correctamente!!", tipoEquipo })
     } catch (e) {
-        return res.status(500).json({ msj: e })
+        return res.status(500).json({ Error: 'No se puede realizar la solicitud!!', e });
     }
 }
 
@@ -98,13 +107,13 @@ const deleteTipoEquipoById = async (req = request, res = response) => {
         const TipoEquipoBD = await TipoEquipo.findById(id)
 
         if (!TipoEquipoBD) {
-            return res.status(404).json({ msj: "No existe, Tipo de equipo no encontrado!!" })
+            return res.status(404).json({ Error: "Error, Tipo de equipo no encontrado!!" })
         }
 
         await TipoEquipo.findByIdAndDelete(id)
-        return res.status(200).json({ msj: "Borrado satisfactorio!!", id })
+        return res.status(200).json({ msg: "Operacion realizada con exito!!, se borró Tipo Equipo:", TipoEquipoBD })
     } catch (e) {
-        return res.status(500).json({ msj: "Error al realizar la operacion!!", e })
+        return res.status(500).json({ Error: 'No se puede realizar la solicitud!!', e });
     }
 
 }
