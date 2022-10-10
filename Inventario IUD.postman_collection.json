@@ -1,0 +1,632 @@
+{
+	"info": {
+		"_postman_id": "840163c5-ec3a-45e4-bd76-202342e2fd13",
+		"name": "Inventario IUD",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Tipos de Equipos",
+			"item": [
+				{
+					"name": "Crear Tipos de Equipos",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"celular\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/tipoequipos/create",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"tipoequipos",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar Tipos de Equipos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/tipoequipos/all?estado=",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"tipoequipos",
+								"all"
+							],
+							"query": [
+								{
+									"key": "estado",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar Tipos de Equipos por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/tipoequipos/63433872ab14c0a61eba7bc6/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"tipoequipos",
+								"63433872ab14c0a61eba7bc6",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Tipos de Equipos por ID",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"COMPUTador\",\r\n    \"estado\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/tipoequipos/update/63433872ab14c0a61eba7bc6/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"tipoequipos",
+								"update",
+								"63433872ab14c0a61eba7bc6",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Tipos de Equipos por ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/tipoequipos/delete/63433872ab14c0a61eba7bc6/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"tipoequipos",
+								"delete",
+								"63433872ab14c0a61eba7bc6",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Estados",
+			"item": [
+				{
+					"name": "Crear Estados",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"EN BODEGA\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/estados/create",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"estados",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar Estados",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/estados/all?estado=",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"estados",
+								"all"
+							],
+							"query": [
+								{
+									"key": "estado",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar Estado por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/estados/634339a3088b7c6ffe24a9a4/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"estados",
+								"634339a3088b7c6ffe24a9a4",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Estado por ID",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"nombre\": \"EN USO\",\r\n        \"estado\": \"false\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/estados/update/634339a3088b7c6ffe24a9a4/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"estados",
+								"update",
+								"634339a3088b7c6ffe24a9a4",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Estado por ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/estados/delete/634339a3088b7c6ffe24a9a4/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"estados",
+								"delete",
+								"634339a3088b7c6ffe24a9a4",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Marcas",
+			"item": [
+				{
+					"name": "Crear Marcas",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"ACER\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/marcas/create/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"marcas",
+								"create",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar Marcas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/marcas/all?estado=true",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"marcas",
+								"all"
+							],
+							"query": [
+								{
+									"key": "estado",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar Marca por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/marcas/63433a35088b7c6ffe24a9c4/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"marcas",
+								"63433a35088b7c6ffe24a9c4",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Marca por ID",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"SAMSUNG\",\r\n    \"estado\": \"true\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/marcas/update/634353b2edb10509d5ee8846/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"marcas",
+								"update",
+								"634353b2edb10509d5ee8846",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Marca por ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/marcas/delete/63433a35088b7c6ffe24a9c4/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"marcas",
+								"delete",
+								"63433a35088b7c6ffe24a9c4",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Usuarios",
+			"item": [
+				{
+					"name": "Crear Usuarios",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Francisco\",\r\n    \"email\": \"edwardo_99@hotmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/usuarios/create/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"usuarios",
+								"create",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar Usuarios",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/usuarios/all?estado=",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"usuarios",
+								"all"
+							],
+							"query": [
+								{
+									"key": "estado",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar Usuario por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/usuarios/63433c38088b7c6ffe24a9f8/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"usuarios",
+								"63433c38088b7c6ffe24a9f8",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Usuario por ID",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Francisco cequeda\",\r\n    \"estado\": \"true\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/usuarios/update/63433c38088b7c6ffe24a9f8/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"usuarios",
+								"update",
+								"63433c38088b7c6ffe24a9f8",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Usuario por ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/usuarios/delete/63433c38088b7c6ffe24a9f8/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"usuarios",
+								"delete",
+								"63433c38088b7c6ffe24a9f8",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Inventario",
+			"item": [
+				{
+					"name": "Crear Inventario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Francisco\",\r\n    \"email\": \"edwardo_99@hotmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/inventario/create/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"inventario",
+								"create",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar Inventario",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/inventarios/all?estado=",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"inventarios",
+								"all"
+							],
+							"query": [
+								{
+									"key": "estado",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar Inventario por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/inventario/63433c38088b7c6ffe24a9f8/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"inventario",
+								"63433c38088b7c6ffe24a9f8",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Inventario por ID",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Francisco cequeda\",\r\n    \"estado\": \"true\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/inventario/update/63433c38088b7c6ffe24a9f8/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"inventario",
+								"update",
+								"63433c38088b7c6ffe24a9f8",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Inventario por ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/inventario/delete/63433c38088b7c6ffe24a9f8/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"inventario",
+								"delete",
+								"63433c38088b7c6ffe24a9f8",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

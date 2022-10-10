@@ -10,7 +10,7 @@ Crear Usuario
  */
 
 const createUsuario = async (req = request, res = response) => {
-    
+
     try {
 
         if (req.body.nombre.length < 3) {
@@ -18,7 +18,7 @@ const createUsuario = async (req = request, res = response) => {
         }
 
         const data = { nombre: req.body.nombre.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ""), email: req.body.email.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "") };
-        const usuarioDB = await Usuarios.findOne({email: data.email})
+        const usuarioDB = await Usuarios.findOne({ email: data.email })
 
         if (usuarioDB) {
             return res.status(400).json({ msg: 'Ya existe en la DB' })
@@ -26,7 +26,7 @@ const createUsuario = async (req = request, res = response) => {
 
         const usuarioSchema = new Usuarios(data);
         await usuarioSchema.save();
-        return res.status(201).json({ msg: "Usuario creado correctamente!", usuarioSchema})
+        return res.status(201).json({ msg: "Usuario creado correctamente!", usuarioSchema })
 
     } catch (e) {
         return res.status(500).json({ Error: 'No se puede realizar la solicitud!!', e });
@@ -85,14 +85,16 @@ const updateUsuarioByID = async (req = request, res = response) => {
 
     try {
 
-        if (req.body.nombre.length < 3 || req.body.estado.length < 3) {
-            return res.status(400).json({ error: "Valores incorrectos!!" });
+        if (req.body.nombre) {
+            req.body.nombre = req.body.nombre.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "")
+        }
+
+        if (req.body.email) {
+            req.body.email = req.body.email.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "")
         }
 
         const id = req.params.id;
-        const nombre = req.body.nombre.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "");
-        const estado = req.body.estado;
-        const data = { nombre, estado };
+        const data = req.body;
         data.fecha_actualizacion = new Date();
 
         const val = await Usuarios.findById(id);
@@ -126,7 +128,7 @@ const deleteUsuarioByID = async (req = request, res = response) => {
 
         await Usuarios.findByIdAndDelete(id);
         return res.status(200).json({ msg: "Operacion realizada con exito!!, se borró Usuario:", usuarioDB })
-        
+
     } catch (e) {
         return res.status(500).json({ Error: 'No se puede realizar la solicitud!!', e });
     }

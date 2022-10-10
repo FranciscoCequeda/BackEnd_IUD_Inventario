@@ -75,17 +75,15 @@ Actualizar un documento de TipoEquipo por su ID
 const updateTipoEquipoById = async (req = request, res = response) => {
     try {
 
-        if (req.body.nombre.length < 3 || req.body.estado.length < 3) {
-            return res.status(400).json({ error: "Valores incorrectos!!" });
+        if (req.body.nombre) {
+            req.body.nombre = req.body.nombre.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "")
         }
 
         const id = req.params.id
-        const nombre = req.body.nombre.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "");;
-        const estado = req.body.estado;
-        const data = { nombre, estado }
+        const data = req.body;
         data.fecha_actualizacion = new Date()
 
-        const val = await Estado.findById(id);
+        const val = await TipoEquipo.findById(id);
 
         if (!val) {
             return res.status(404).json({ Error: "Error, Tipo de equipo no encontrado!!" })

@@ -37,7 +37,7 @@ const createMarcas = async (req = request, res = response) => {
 
 
 /*
-Consultar todos los documentos de la coleccion Estado
+Consultar todos los documentos de la coleccion Marcas
 */
 
 const getAllMarcas = async (req = request, res = response) => {
@@ -61,7 +61,7 @@ const getAllMarcas = async (req = request, res = response) => {
 
 
 /*
-Consultar un documento de Estado por su ID
+Consultar un documento de Marcas por su ID
 */
 
 const getMarcaByID = async (req = request, res = response) => {
@@ -82,21 +82,19 @@ const getMarcaByID = async (req = request, res = response) => {
 
 
 /*
-Actualizar un documento de Estado por su ID
+Actualizar un documento de Marcas por su ID
 */
 
 const updateMarcaByID = async (req = request, res = response) => {
 
     try {
 
-        if (req.body.nombre.length < 3 || req.body.estado.length < 3) {
-            return res.status(400).json({ error: "Valores incorrectos!!" });
+        if (req.body.nombre) {
+            req.body.nombre = req.body.nombre.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "")
         }
 
         const id = req.params.id;
-        const nombre = req.body.nombre.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "");;
-        const estado = req.body.estado;
-        const data = { nombre, estado }
+        const data = req.body;
         data.fecha_actualizacion = new Date();
 
         const Marca = await Marcas.findById(id);
@@ -115,7 +113,7 @@ const updateMarcaByID = async (req = request, res = response) => {
 
 
 /*
-Borrar un documento de Estado por su ID
+Borrar un documento de Marcas por su ID
 */
 
 const deleteMarcaByID = async (req = request, res = response) => {
