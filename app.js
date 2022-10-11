@@ -32,4 +32,10 @@ app.use("/api/marcas", Marcas);
 app.use("/api/usuarios", Usuarios);
 app.use("/api/inventarios", Inventarios);
 
+app.get("*", (req, res) => {
+    return res.status(404).json({
+        Error: 'Pagina solicitada no encontrada!!!'
+    });
+});
+
 module.exports = app;
