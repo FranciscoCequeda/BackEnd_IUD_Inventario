@@ -6,6 +6,11 @@ const Marcas = require("../models/marca");
 const TipoEquipo = require("../models/tipoEquipo");
 const Usuarios = require("../models/usuario");
 
+// Para subir fotos
+const path = require("path");
+const fs = require("fs");
+const { v4: uuidv4 } = require("uuid");
+
 // Creacion de CRUD Inventario
 
 /*
@@ -182,13 +187,84 @@ const updateInventarioByID = async (req = request, res = response) => {
 Borrar un documento de Inventario por su ID
 */
 
+const deleteInventarioByID = async (req = request, res = response) => {
+    try {
+        const id = req.params.id;
+        const inventarioDB = await Inventario.findById(id);
+
+        if (!inventarioDB) {
+            return res.status(404).json({ Error: "Error, Inventario no encontrado!!" });
+        }
+
+        await Inventario.findByIdAndDelete(id)
+
+        return res.status(200).json({ msg: "Operacion realizada con exito!!, se borró Inventario:", inventarioDB })
+    } catch (e) {
+        return res.status(500).json({ Error: 'No se puede realizar la solicitud!!', e });
+    }
+}
+
 
 /*
 Subir foto por ID
 */
+const uploadImageByID = async (req = request, res = response) => {
+    const { id } = req.params;
+    const invBD = await Inventario.findOne({ _id: id});
+    if(!invBD){
+        return res.status(400).json({
+             msg: 'No existe inventario'
+        });
+    }
+    if(!req.files || Object.keys(req.files) == 0 || !req.files.foto){
+       return res.status(400).json({msj: 'Sin fotos para subir'});
+    }
+    const foto = req.files.foto;
 
-/*
-consultar foto por ID
-*/
+    const extFileArray = foto.name.split('.');
+    const extFile = extFileArray[extFileArray.length - 1];
 
-module.exports = { createInventario, getAllInventario, getInventarioByID, updateInventarioByID }
+    const extensiones = ['jpg', 'png', 'jpeg'];
+
+    if(!extensiones.includes(extFile)){
+        return res.status(400).json({msj: 'Archivo no válido'});
+    }
+
+    const nombreFileTemp = uuidv4() + "." + extFile;
+
+    const uploadPath = path.join(__dirname, '../uploads/', nombreFileTemp);
+    foto.mv(uploadPath, e => {
+        if(e){
+            return res.status(500).json({e});
+        }
+    });
+    const data = {};
+    data.foto = nombreFileTemp;
+
+    const inv = await Inventario.findByIdAndUpdate(id, data, {new : true});
+    if(!inv){
+        return res.status(500).send(e);
+    }
+    res.json({msj: 'Subido a ' + uploadPath});
+}
+
+
+/**
+ * Consultar foto por ID
+ */
+ const getImageByID = async (req = request, res = response) => {
+    const { id } = req.params;
+    const inventarioBD = await Inventario.findOne({ _id: id});
+
+    if(!inventarioBD.foto){
+        return res.status(404).json({ Error: "Error, Foto no encontrada!!" });
+    }
+
+    const nombreFoto = inventarioBD.foto;
+    const pathImg =  path.join(__dirname, '../uploads/', nombreFoto);
+    if(fs.existsSync(pathImg))
+        res.sendFile(pathImg);
+}
+
+module.exports = { createInventario, getAllInventario, getInventarioByID, updateInventarioByID, 
+    deleteInventarioByID, uploadImageByID, getImageByID }
