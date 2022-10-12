@@ -205,19 +205,21 @@ const deleteInventarioByID = async (req = request, res = response) => {
 }
 
 
+// Codigo robado del repo del profe :S
+
 /*
 Subir foto por ID
 */
 const uploadImageByID = async (req = request, res = response) => {
     const { id } = req.params;
-    const invBD = await Inventario.findOne({ _id: id});
-    if(!invBD){
+    const invBD = await Inventario.findOne({ _id: id });
+    if (!invBD) {
         return res.status(400).json({
-             msg: 'No existe inventario'
+            msg: 'No existe inventario'
         });
     }
-    if(!req.files || Object.keys(req.files) == 0 || !req.files.foto){
-       return res.status(400).json({msj: 'Sin fotos para subir'});
+    if (!req.files || Object.keys(req.files) == 0 || !req.files.foto) {
+        return res.status(400).json({ msj: 'Sin fotos para subir' });
     }
     const foto = req.files.foto;
 
@@ -226,45 +228,46 @@ const uploadImageByID = async (req = request, res = response) => {
 
     const extensiones = ['jpg', 'png', 'jpeg'];
 
-    if(!extensiones.includes(extFile)){
-        return res.status(400).json({msj: 'Archivo no válido'});
+    if (!extensiones.includes(extFile)) {
+        return res.status(400).json({ msj: 'Archivo no válido' });
     }
 
     const nombreFileTemp = uuidv4() + "." + extFile;
 
     const uploadPath = path.join(__dirname, '../uploads/', nombreFileTemp);
     foto.mv(uploadPath, e => {
-        if(e){
-            return res.status(500).json({e});
+        if (e) {
+            return res.status(500).json({ e });
         }
     });
     const data = {};
     data.foto = nombreFileTemp;
 
-    const inv = await Inventario.findByIdAndUpdate(id, data, {new : true});
-    if(!inv){
+    const inv = await Inventario.findByIdAndUpdate(id, data, { new: true });
+    if (!inv) {
         return res.status(500).send(e);
     }
-    res.json({msj: 'Subido a ' + uploadPath});
+    res.json({ msj: 'Subido a ' + uploadPath });
 }
-
 
 /**
  * Consultar foto por ID
  */
- const getImageByID = async (req = request, res = response) => {
+const getImageByID = async (req = request, res = response) => {
     const { id } = req.params;
-    const inventarioBD = await Inventario.findOne({ _id: id});
+    const inventarioBD = await Inventario.findOne({ _id: id });
 
-    if(!inventarioBD.foto){
+    if (!inventarioBD.foto) {
         return res.status(404).json({ Error: "Error, Foto no encontrada!!" });
     }
 
     const nombreFoto = inventarioBD.foto;
-    const pathImg =  path.join(__dirname, '../uploads/', nombreFoto);
-    if(fs.existsSync(pathImg))
+    const pathImg = path.join(__dirname, '../uploads/', nombreFoto);
+    if (fs.existsSync(pathImg))
         res.sendFile(pathImg);
 }
 
-module.exports = { createInventario, getAllInventario, getInventarioByID, updateInventarioByID, 
-    deleteInventarioByID, uploadImageByID, getImageByID }
+module.exports = {
+    createInventario, getAllInventario, getInventarioByID, updateInventarioByID,
+    deleteInventarioByID, uploadImageByID, getImageByID
+}
