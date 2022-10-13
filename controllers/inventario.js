@@ -40,12 +40,12 @@ const createInventario = async (req = request, res = response) => {
 
         const data = req.body;
 
-        const { marca, usuario, tipo_equipo, estado } = data;
+        const { marca, usuario, tipo_equipo, estado_equipo } = data;
 
         const marcaDB = await Marcas.findOne({ _id: marca._id, estado: true })
         const usuarioDB = await Usuarios.findOne({ _id: usuario._id, estado: true })
         const tipo_equipoDB = await TipoEquipo.findOne({ _id: tipo_equipo._id, estado: true })
-        const estadoDB = await Estado.findOne({ _id: estado._id, estado: true })
+        const estadoDB = await Estado.findOne({ _id: estado_equipo._id, estado: true })
 
         if (!marcaDB) {
             return res.status(404).json({ Error: 'Error, Marca Inactiva!!' });
@@ -85,10 +85,10 @@ const getAllInventario = async (req = request, res = response) => {
         const data = req.query
 
         if (!data.estado) {
-            const inventarioDB = await Inventario.find().populate({ path: 'usuario' }).populate({ path: 'marca' }).populate({ path: 'estado' }).populate({ path: 'tipo_equipo' },);
+            const inventarioDB = await Inventario.find().populate({ path: 'usuario' }).populate({ path: 'marca' }).populate({ path: 'estado_equipo' }).populate({ path: 'tipo_equipo' });
             return res.json({ inventarioDB });
         } else {
-            const inventarioDB = await Inventario.find(data);
+            const inventarioDB = await Inventario.find(data).populate({ path: 'usuario' }).populate({ path: 'marca' }).populate({ path: 'estado_equipo' }).populate({ path: 'tipo_equipo' });
             return res.json({ inventarioDB });
         }
 
@@ -105,7 +105,7 @@ const getInventarioByID = async (req = request, res = response) => {
     try {
 
         const id = req.params.id;
-        const inventarioDB = await Inventario.findById(id).populate({ path: 'usuario' }).populate({ path: 'marca' }).populate({ path: 'estado' }).populate({ path: 'tipo_equipo' },);;
+        const inventarioDB = await Inventario.findById(id).populate({ path: 'usuario' }).populate({ path: 'marca' }).populate({ path: 'estado_equipo' }).populate({ path: 'tipo_equipo' });
 
         if (!inventarioDB) {
             return res.status(404).json({ Error: "Error, Inventario no encontrado!!" });
@@ -139,7 +139,7 @@ const updateInventarioByID = async (req = request, res = response) => {
 
         const data = req.body;
 
-        const { marca, usuario, tipo_equipo, estado } = data;
+        const { marca, usuario, tipo_equipo, estado_equipo } = data;
 
         if (marca) {
             const marcaDB = await Marcas.findOne({ _id: marca._id, estado: true });
@@ -164,8 +164,8 @@ const updateInventarioByID = async (req = request, res = response) => {
             }
         }
 
-        if (estado) {
-            const estadoDB = await Estado.findOne({ _id: estado._id, estado: true })
+        if (estado_equipo) {
+            const estadoDB = await Estado.findOne({ _id: estado_equipo._id, estado: true })
 
             if (!estadoDB) {
                 return res.status(404).json({ Error: 'Error, Estado Inactivo!!' });

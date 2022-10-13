@@ -39,7 +39,7 @@ const InventarioSchema = Schema(
             ref: 'Marcas',
             required: true
         },
-        estado: {
+        estado_equipo: {
             type: Schema.Types.ObjectId,
             ref: 'Estado',
             required: true
@@ -47,6 +47,11 @@ const InventarioSchema = Schema(
         tipo_equipo: {
             type: Schema.Types.ObjectId,
             ref: 'TipoEquipo',
+            required: true
+        },
+        estado: {
+            type: Boolean,
+            default: true,
             required: true
         }
     }
