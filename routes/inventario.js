@@ -9,8 +9,8 @@ const router = Router();
 
 router.post("/create", [validarJWT, verificarRol], createInventario);
 router.get("/all", getAllInventario);
-router.get("/inventario/:id", [validarJWT, verificarRol], getInventarioByID);
-router.put("/update/:id", updateInventarioByID);
+router.get("/inventario/:id", getInventarioByID);
+router.put("/update/:id", [validarJWT, verificarRol], updateInventarioByID);
 router.delete("/delete/:id", [validarJWT, verificarRol], deleteInventarioByID);
 
 // Subida foto
