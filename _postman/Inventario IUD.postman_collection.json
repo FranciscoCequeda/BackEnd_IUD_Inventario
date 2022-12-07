@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "840163c5-ec3a-45e4-bd76-202342e2fd13",
+		"_postman_id": "7fc3cfed-fa82-4755-881c-80e991402b8b",
 		"name": "Inventario IUD",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23647853"
 	},
 	"item": [
 		{
@@ -15,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombre\": \"celular\"\r\n}",
+							"raw": "{\r\n    \"nombre\": \"MONITORES\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -65,13 +66,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/tipoequipos/63433872ab14c0a61eba7bc6/",
+							"raw": "{{url}}/tipoequipos/63439faec18d695cb721dc1d/",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"tipoequipos",
-								"63433872ab14c0a61eba7bc6",
+								"63439faec18d695cb721dc1d",
 								""
 							]
 						}
@@ -85,7 +86,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombre\": \"COMPUTador\",\r\n    \"estado\": false\r\n}",
+							"raw": "{\r\n\r\n    \"estado\": false\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -93,14 +94,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/tipoequipos/update/63433872ab14c0a61eba7bc6/",
+							"raw": "{{url}}/tipoequipos/update/63479503b6a0989cb4b04ae5/",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"tipoequipos",
 								"update",
-								"63433872ab14c0a61eba7bc6",
+								"63479503b6a0989cb4b04ae5",
 								""
 							]
 						}
@@ -113,14 +114,14 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/tipoequipos/delete/63433872ab14c0a61eba7bc6/",
+							"raw": "{{url}}/tipoequipos/delete/6343a024c18d695cb721dc2d/",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"tipoequipos",
 								"delete",
-								"63433872ab14c0a61eba7bc6",
+								"6343a024c18d695cb721dc2d",
 								""
 							]
 						}
@@ -139,7 +140,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombre\": \"EN BODEGA\"\r\n}",
+							"raw": "{\r\n    \"nombre\": \"prueba\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -189,13 +190,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/estados/634339a3088b7c6ffe24a9a4/",
+							"raw": "{{url}}/estados/6343a070c18d695cb721dc41/",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"estados",
-								"634339a3088b7c6ffe24a9a4",
+								"6343a070c18d695cb721dc41",
 								""
 							]
 						}
@@ -209,7 +210,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \"nombre\": \"EN USO\",\r\n        \"estado\": \"false\"\r\n}",
+							"raw": "{\r\n        \"nombre\": \"prueba\",\r\n        \"estado\": \"false\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -217,14 +218,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/estados/update/634339a3088b7c6ffe24a9a4/",
+							"raw": "{{url}}/estados/update/6343a070c18d695cb721dc41/",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"estados",
 								"update",
-								"634339a3088b7c6ffe24a9a4",
+								"6343a070c18d695cb721dc41",
 								""
 							]
 						}
@@ -237,14 +238,14 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/estados/delete/634339a3088b7c6ffe24a9a4/",
+							"raw": "{{url}}/estados/delete/6343a070c18d695cb721dc41/",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"estados",
 								"delete",
-								"634339a3088b7c6ffe24a9a4",
+								"6343a070c18d695cb721dc41",
 								""
 							]
 						}
@@ -263,7 +264,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombre\": \"ACER\"\r\n}",
+							"raw": "{\r\n    \"nombre\": \"MACBOOK PRO\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -290,7 +291,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/marcas/all?estado=true",
+							"raw": "{{url}}/marcas/all?estado=",
 							"host": [
 								"{{url}}"
 							],
@@ -301,7 +302,7 @@
 							"query": [
 								{
 									"key": "estado",
-									"value": "true"
+									"value": ""
 								}
 							]
 						}
@@ -314,13 +315,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/marcas/63433a35088b7c6ffe24a9c4/",
+							"raw": "{{url}}/marcas/6343a104c18d695cb721dc59/",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"marcas",
-								"63433a35088b7c6ffe24a9c4",
+								"6343a104c18d695cb721dc59",
 								""
 							]
 						}
@@ -334,7 +335,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombre\": \"SAMSUNG\",\r\n    \"estado\": \"true\"\r\n}",
+							"raw": "{\r\n\r\n    \"estado\": \"false\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -342,14 +343,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/marcas/update/634353b2edb10509d5ee8846/",
+							"raw": "{{url}}/marcas/update/6343a104c18d695cb721dc59/",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"marcas",
 								"update",
-								"634353b2edb10509d5ee8846",
+								"6343a104c18d695cb721dc59",
 								""
 							]
 						}
@@ -362,14 +363,14 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/marcas/delete/63433a35088b7c6ffe24a9c4/",
+							"raw": "{{url}}/marcas/delete/6343a104c18d695cb721dc59/",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"marcas",
 								"delete",
-								"63433a35088b7c6ffe24a9c4",
+								"6343a104c18d695cb721dc59",
 								""
 							]
 						}
@@ -385,10 +386,16 @@
 					"name": "Crear Usuarios",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombre\": \"Francisco\",\r\n    \"email\": \"edwardo_99@hotmail.com\"\r\n}",
+							"raw": "{\r\n    \"nombre\": \"test\",\r\n    \"email\": \"test@gmail.com\",\r\n    \"password\": \"55555\",\r\n    \"rol\": \"ADMIN\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -413,7 +420,13 @@
 					"name": "Consultar Usuarios",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzkwMDkwNjVkOTc3MDEzYzk4MTE0ZGYiLCJub21icmUiOiJKT1JHRSBBUk1BTkRPIEpVTElPIEMiLCJlbWFpbCI6IkpPUkdFSkMyNUBHTUFJTC5DT00iLCJyb2wiOiJET0NFTlRFIiwiaWF0IjoxNjcwMzkzNzg0LCJleHAiOjE2NzA0MTUzODR9.Bh1Z2s_7xfQrlQhwyv4rteFzFoojEcwJ03tEGO7Kk9s",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "{{url}}/usuarios/all?estado=",
 							"host": [
@@ -437,15 +450,21 @@
 					"name": "Consultar Usuario por ID",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "{{url}}/usuarios/63433c38088b7c6ffe24a9f8/",
+							"raw": "{{url}}/usuarios/638ee3c43c83b3e8009972ed/",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"usuarios",
-								"63433c38088b7c6ffe24a9f8",
+								"638ee3c43c83b3e8009972ed",
 								""
 							]
 						}
@@ -456,10 +475,16 @@
 					"name": "Actualizar Usuario por ID",
 					"request": {
 						"method": "PUT",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombre\": \"Francisco cequeda\",\r\n    \"estado\": \"true\"\r\n}",
+							"raw": "{\r\n\r\n    \"password\": \"123456\"\r\n\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -467,14 +492,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/usuarios/update/63433c38088b7c6ffe24a9f8/",
+							"raw": "{{url}}/usuarios/update/639009065d977013c98114df/",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"usuarios",
 								"update",
-								"63433c38088b7c6ffe24a9f8",
+								"639009065d977013c98114df",
 								""
 							]
 						}
@@ -487,14 +512,14 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/usuarios/delete/63433c38088b7c6ffe24a9f8/",
+							"raw": "{{url}}/usuarios/delete/638ee5a685948fc29851ec59/",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"usuarios",
 								"delete",
-								"63433c38088b7c6ffe24a9f8",
+								"638ee5a685948fc29851ec59",
 								""
 							]
 						}
@@ -513,7 +538,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombre\": \"Francisco\",\r\n    \"email\": \"edwardo_99@hotmail.com\"\r\n}",
+							"raw": "{\r\n    \"serial\": \"12345678910\",\r\n    \"modelo\": \"HP-14 BS011LA\",\r\n    \"descripcion\": \"EQUIPO PARA ESTUDIAR EN LA IUDIGITAL\",\r\n    \"color\": \"\",\r\n    \"fecha_compra\": \"2022-10-08T00:00:00.000Z\",\r\n    \"precio\": 5500,\r\n    \"usuario\": {\r\n        \"_id\": \"6343a169c18d695cb721dc67\"\r\n    },\r\n    \"marca\": {\r\n        \"_id\": \"634874ca3b41a3482177d329\"\r\n    },\r\n    \"estado_equipo\": {\r\n        \"_id\": \"6343a058c18d695cb721dc35\"\r\n    },\r\n    \"tipo_equipo\": {\r\n        \"_id\": \"63487c373b41a3482177d36e\"\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -521,12 +546,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/inventario/create/",
+							"raw": "{{url}}/inventarios/create/",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
-								"inventario",
+								"inventarios",
 								"create",
 								""
 							]
@@ -564,13 +589,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/inventario/63433c38088b7c6ffe24a9f8/",
+							"raw": "{{url}}/inventarios/inventario/63489021b461c2a938454124/",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
+								"inventarios",
 								"inventario",
-								"63433c38088b7c6ffe24a9f8",
+								"63489021b461c2a938454124",
 								""
 							]
 						}
@@ -584,7 +610,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombre\": \"Francisco cequeda\",\r\n    \"estado\": \"true\"\r\n}",
+							"raw": "{\r\n    \"estado\": false\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -592,14 +618,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/inventario/update/63433c38088b7c6ffe24a9f8/",
+							"raw": "{{url}}/inventarios/update/63489021b461c2a938454124/",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
-								"inventario",
+								"inventarios",
 								"update",
-								"63433c38088b7c6ffe24a9f8",
+								"63489021b461c2a938454124",
 								""
 							]
 						}
@@ -612,15 +638,46 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/inventario/delete/63433c38088b7c6ffe24a9f8/",
+							"raw": "{{url}}/inventarios/delete/63460abf219782e4898fdcdc/",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
-								"inventario",
+								"inventarios",
 								"delete",
-								"63433c38088b7c6ffe24a9f8",
+								"63460abf219782e4898fdcdc",
 								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"JORGEJC25@GMAIL.COM\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"login"
 							]
 						}
 					},
