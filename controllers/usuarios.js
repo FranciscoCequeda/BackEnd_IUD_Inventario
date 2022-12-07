@@ -2,6 +2,7 @@ const Usuarios = require("../models/usuario");
 
 const { request, response } = require("express");
 
+const crypt = require('bcryptjs');
 
 // Creacion de CRUD Usuario
 
@@ -14,10 +15,31 @@ const createUsuario = async (req = request, res = response) => {
     try {
 
         if (req.body.nombre.length < 3) {
-            return res.status(400).json({ msg: 'Dato debe ser mayor a 3 caracteres!!' })
+            return res.status(400).json({ msg: 'Nombre debe ser mayor a 3 caracteres!!' })
         }
 
-        const data = { nombre: req.body.nombre.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ""), email: req.body.email.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "") };
+        if (req.body.email.length < 8) {
+            return res.status(400).json({ msg: 'Email debe ser mayor a 8 caracteres!!' })
+        }
+
+        if (req.body.password.length < 5) {
+            return res.status(400).json({ msg: 'Password debe ser mayor a 5 caracteres!!' })
+        }
+
+        if (!req.body.rol) {
+            return res.status(400).json({ msg: 'Rol Vacío!!' })
+        }
+
+        const salt = crypt.genSaltSync();
+
+        const pass = crypt.hashSync(req.body.password, salt);
+
+        const data = {
+            nombre: req.body.nombre.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ""),
+            email: req.body.email.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ""),
+            password: pass, rol: req.body.rol.toUpperCase()
+        };
+
         const usuarioDB = await Usuarios.findOne({ email: data.email })
 
         if (usuarioDB) {
@@ -91,6 +113,15 @@ const updateUsuarioByID = async (req = request, res = response) => {
 
         if (req.body.email) {
             req.body.email = req.body.email.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "")
+        }
+
+        if (req.body.rol) {
+            req.body.rol = req.body.rol.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "")
+        }
+
+        if (req.body.password) {
+            const salt = crypt.genSaltSync();
+            req.body.password = crypt.hashSync(req.body.password, salt);
         }
 
         const id = req.params.id;
